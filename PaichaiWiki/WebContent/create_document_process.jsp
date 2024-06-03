@@ -8,15 +8,16 @@
 
 <%
     // 데이터베이스 연결 정보
-    String url = "jdbc:mysql://localhost:3306/PaichaiwikiDB?useUnicode=true&characterEncoding=UTF-8";
 
+    String url = "jdbc:mysql://localhost:3306/PaichaiwikiDB";
     String username = "manager";
     String password = "1234";
 
     // 사용자가 입력한 정보 가져오기
     String title = request.getParameter("title");
     String content = request.getParameter("content");
-
+out.println(title);
+out.println(content);
     // 데이터베이스 연결 및 문서 작성 처리
     Connection conn = null;
     PreparedStatement stmt = null;

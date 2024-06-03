@@ -1,23 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.7
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+<meta charset="UTF-8">
   <jsp:include page='./inc/header.jsp'/>
 </head>
 
@@ -27,15 +14,15 @@
     <jsp:include page='./inc/nav.jsp'/>
     
     
-    <div class="container-fluid py-sm-4 p-0">
+    <div class="container-fluid py-sm-4">
       <div class="row">
-		<div class="col-2"></div>
-        <div class="col-8">
+		<div class="col-0 col-lg-2"></div>
+        <div class="col-12 col-lg-8">
           <div class="card h-100">
           	<div class="card-header"> 제목</div>
             <div class="card-body p-3">
               <div class="row">
-                <div class="col-8">
+                <div class="col">
 				
 <%@ page import="java.sql.*" %>
 <%@ page import="java.io.*,java.util.*" %>
@@ -50,16 +37,19 @@
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
+    
+    String search = request.getParameter("search");
+
 
     try {
         Class.forName("com.mysql.jdbc.Driver");
         conn = DriverManager.getConnection(url, username, password);
 
         // 모든 문서를 조회
-        String sql = "SELECT * FROM Pages";
+        String sql = "SELECT * FROM Pages where title=?";
         stmt = conn.prepareStatement(sql);
+        stmt.setString(1, search);
         rs = stmt.executeQuery();
-
         // 조회된 문서 출력
         while (rs.next()) {
             out.println("제목: " + rs.getString("Title") + "<br>");
@@ -91,7 +81,7 @@
           </div>
         </div>
         
-		<div class="col-2"></div>
+		<div class="col-0 col-lg-2"></div>
       </div>
      
     </div>

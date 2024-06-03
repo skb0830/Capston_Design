@@ -4,9 +4,7 @@
 
 <%
     // 데이터베이스 연결 정보
-    String url = "jdbc:mysql://localhost:3306/PaichaiwikiDB";
-    String dbUsername = "manager";
-    String dbPassword = "1234";
+    
 
     // 사용자가 입력한 정보 가져오기
     String username = request.getParameter("username");
@@ -26,7 +24,7 @@
 
     try {
         Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection(url, dbUsername, dbPassword);
+        //conn = DriverManager.getConnection(url, dbUsername, dbPassword);
 
         // 회원가입 정보를 Users 테이블에 삽입
         String sql = "INSERT INTO Users (Username, Email, Password) VALUES (?, ?, ?)";

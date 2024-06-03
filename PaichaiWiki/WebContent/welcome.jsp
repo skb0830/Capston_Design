@@ -1,8 +1,4 @@
-<html>
-	<head>
-		<title>welcome</title>
-	</head>
-	<body>
-		<h1>Hello PaichaiWiki!</h1>
-	</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script>
+location.href = "/view_document.jsp?search='배재대학교'";
+</script>

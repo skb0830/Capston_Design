@@ -36,12 +36,12 @@
 		<div class="col-xl-2 col-sm-0"></div>
         <div class="col-xl-8 col-sm-12">
           <div class="card h-100">
-	            <form action="/create_document_process.jsp" method="post" method="post">
+	            <form action="create_document_process.jsp"  method="post">
           			<div class="card-header pb-0">
 			            <div class="row">
 				          	<div class="col form-group">
 						        <label for="example-text-input" class="form-control-label">제목</label>
-						        <input class="form-control" type="text" value="" id="title">
+						        <input class="form-control" type="text" value="" name="title" id="title">
 						    </div>
 					    </div>
 				    </div>
@@ -53,7 +53,7 @@
 					    </div>
 					     <div class="row">
 			                <div class="col">
-							  	<textarea id="content" name="editordata"></textarea>
+							  	<textarea id="content" name="content" ></textarea>
 			                </div>
 		                </div>
 		                <div class="row pt-2">
