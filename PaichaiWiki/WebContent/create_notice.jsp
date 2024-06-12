@@ -18,7 +18,7 @@
 	<main
 		class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 		<jsp:include page='./inc/nav.jsp' />
-		
+
 		<%@ page import="java.sql.*"%>
 		<%@ page import="java.io.*,java.util.*"%>
 		<%
@@ -31,61 +31,58 @@
 				out.println("history.back();");
 				out.println("</script>");
 			}
-			//내용 없이 접근
-			String search = request.getParameter("search");
-			if (search == null || "null".equals(search) || "".equals(search) ) {
-				out.println("<script>");
-				out.println("alert(\"비정상적인 접근입니다.\");");
-				out.println("history.back();");
-				out.println("</script>");
+			
+			String Title = "";
+			String Content = "";
+			String notice_id = request.getParameter("no");
+			if(notice_id == null || "null".equals(notice_id)){
+				notice_id = "-1";
 			}
 
-			String Content = "";
-			int pageID = -1;
+			// 데이터베이스 연결 정보
+			String url = "jdbc:mysql://localhost:3306/PaichaiwikiDB";
+			String username = "manager";
+			String password = "1234";
+			// 데이터베이스 연결 및 문서 조회 처리
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
 
-		    // 데이터베이스 연결 정보
-		    String url = "jdbc:mysql://localhost:3306/PaichaiwikiDB";
-		    String username = "manager";
-		    String password = "1234";
-		 // 데이터베이스 연결 및 문서 조회 처리
-		    Connection conn = null;
-		    PreparedStatement stmt = null;
-		    ResultSet rs = null;
-		    
-		    try {
-		        Class.forName("com.mysql.jdbc.Driver");
-		        conn = DriverManager.getConnection(url, username, password);
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection(url, username, password);
 
-		        // 모든 문서를 조회
-		        String sql = "SELECT * FROM Pages where title=? order by CreatedTime desc limit 1";
-		        stmt = conn.prepareStatement(sql);
-		        stmt.setString(1, search);
-		        rs = stmt.executeQuery();
-		        // 조회된 문서 출력		        
-		       	while (rs.next()) {
-		       		//내용
-		       		Content = rs.getString("Content");
-		        }
+				// 모든 문서를 조회
+				String sql = "select * from Notice where notice_id=?";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, notice_id);
+				rs = stmt.executeQuery();
+				// 조회된 문서 출력		        
+				while (rs.next()) {
+					//내용
+					Title = rs.getString("Title");
+					Content = rs.getString("Content");
+				}
 
-		        
-		    } catch (SQLException ex) {
-		        ex.printStackTrace();
-		        out.println("문서 조회 중 오류가 발생했습니다.");
-		    } catch (ClassNotFoundException ex) {
-		        ex.printStackTrace();
-		        out.println("문서 조회 중 오류가 발생했습니다.");
-		    } finally {
-		        // 연결 및 리소스 해제
-		        try {
-		            if (rs != null) rs.close();
-		            if (stmt != null) stmt.close();
-		            if (conn != null) conn.close();
-		        } catch (SQLException ex) {
-		            ex.printStackTrace();
-		        }
-		    }
-			
-			
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+				out.println("문서 조회 중 오류가 발생했습니다.");
+			} catch (ClassNotFoundException ex) {
+				ex.printStackTrace();
+				out.println("문서 조회 중 오류가 발생했습니다.");
+			} finally {
+				// 연결 및 리소스 해제
+				try {
+					if (rs != null)
+						rs.close();
+					if (stmt != null)
+						stmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
 		%>
 
 		<div class="container-fluid py-sm-4 p-0">
@@ -93,18 +90,26 @@
 				<div class="col-xl-2 col-sm-0"></div>
 				<div class="col-xl-8 col-sm-12">
 					<div class="card h-100">
-						<form action="create_document_process.jsp" method="post">
+						<form action="create_notice_process.jsp" method="post">
 							<div class="card-header pb-0">
-								<div class="card-header">
-									<h3><%= search %></h3>
+								<div class="row">
+									<div class="col form-group">
+										<label for="example-text-input" class="form-control-label">제목</label>
+										<input class="form-control" type="text" value="<%=Title %>" name="title"
+											id="title"> <input class="d-none" type="text"
+											value="<%=notice_id%>" name="notice_id" id="notice_id">
+									</div>
 								</div>
-								<input class="d-none" type="text" value="<%= search %>" name="title" id="title">
-								<input class="d-none" type="text" value="<%= pageID %>" name="pageID" id="pageID">
 							</div>
 					<div class="card-body pt-0">
+					<div class="row">
+					    	<div class="col form-group mb-0">
+						        <label for="example-text-input" class="form-control-label">내용</label>
+						    </div>
+					    </div>
 						<div class="row">
 							<div class="col">
-								<textarea id="content" name="content"><%= Content %></textarea>
+								<textarea id="content" name="content"><%=Content%></textarea>
 							</div>
 						</div>
 						<div class="row pt-2">

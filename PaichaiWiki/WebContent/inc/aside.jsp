@@ -3,15 +3,18 @@
 	pageEncoding="UTF-8"%>
 
 <aside
-	class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+	class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start "
 	id="sidenav-main">
 	<div class="sidenav-header">
+<button class="d-none" data-class="bg-white" onclick="sidebarType(this)">White</button>
 		<i
-			class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-			aria-hidden="true" id="iconSidenav"></i> <a class="navbar-brand m-0"
-			href="/view_document.jsp?search=배재대학교" target=""> <img
-			src="/src/logo_32.png" class="navbar-brand-img h-100" alt="main_logo">
-			<span class="ms-1 font-weight-bold">배 재 위 키</span>
+			class=" p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+			aria-hidden="true" id="iconSidenav"
+			style="font-style: normal; font-weight: bold;">X</i> <a
+			class="navbar-brand m-0" href="/view_document.jsp?search=배재대학교"
+			target=""> <img src="/src/logo_32.png"
+			class="navbar-brand-img h-100" alt="main_logo"> <span
+			class="ms-1 font-weight-bold">배 재 위 키</span>
 		</a>
 	</div>
 	<hr class="horizontal dark mt-0">
@@ -19,12 +22,13 @@
 		id="sidenav-collapse-main" style="height: calc(100vh - 200px);">
 		<ul class="navbar-nav">
 			<li class="nav-item"><a class="nav-link  active"
-				href="../pages/dashboard.html">
+				href="/list_notice.jsp">
 					<div
 						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="fas fa-exclamation"></i>
 						<title>공지사항</title>
-					</div> <span class="nav-link-text ms-1">공지사항</span>
+					</div>
+					<span class="nav-link-text ms-1">공지사항</span>
 			</a></li>
 			<!--  
 			<li class="nav-item"><a class="nav-link  "
@@ -84,7 +88,7 @@
 				href="https://nasum.pcu.ac.kr/" target='_blank'>
 					<div
 						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="fa fa-newspaper"></i>
+						<i class="fa fa-edit"></i>
 						<title>배재대학교 나섬</title>
 					</div> <span class="nav-link-text ms-1">배재대학교 나섬</span>
 			</a></li>

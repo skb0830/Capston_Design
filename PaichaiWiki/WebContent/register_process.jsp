@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.io.*,java.util.*" %>
 
 <%
-    // 데이터베이스 연결 정보
-    
+    request.setCharacterEncoding("utf-8");
 
     // 사용자가 입력한 정보 가져오기
     String username = request.getParameter("username");

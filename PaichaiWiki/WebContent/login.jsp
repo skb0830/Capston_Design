@@ -1,4 +1,5 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,14 +13,14 @@
 
        request.setCharacterEncoding("utf-8");
 	   
+	   
 	   //로그인 시 페이지 넘김
 	   String sess = (String)session.getAttribute("email");
-	   if(sess != null && "null".equals(sess)){
+	   if(sess != null && !"null".equals(sess)){
 			String search = URLEncoder.encode("배재대학교","utf-8");
 			response.sendRedirect("view_document.jsp?search=" + search);
 	   }
 
-	   
 	   String res_txt="";
 	   String check = request.getParameter("check");
 
@@ -144,6 +145,7 @@
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/soft-ui-dashboard.min.js"></script>
 
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
